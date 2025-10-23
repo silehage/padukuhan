@@ -20,7 +20,7 @@ const getData = () => {
 <template>
 
     <AppHeader title="KAS RT 05/02">
-        <div class="flex justify-end q-gutter-sm">
+        <div class="flex q-gutter-sm">
             <q-btn color="primary" @click="router.visit(create())">Tambah Data</q-btn>
             <q-btn color="blue" @click="router.visit(bulkCreate())">Tambah Bulk</q-btn>
             <q-btn color="teal" :href="exportKas().url">Export</q-btn>

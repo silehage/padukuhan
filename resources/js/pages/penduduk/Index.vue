@@ -21,7 +21,7 @@ const searchData = () => {
 <template>
 
     <AppHeader title="Kartu Keluarga">
-        <div class="flex justify-end q-gutter-sm">
+        <div class="flex q-gutter-sm">
             <q-btn color="primary" @click="router.visit(create())">Tambah Data</q-btn>
             <q-btn color="teal" :href="exportExcel().url">Export Excel</q-btn>
             <q-btn color="teal" :href="exportPdf().url">Export PDF</q-btn>
@@ -32,12 +32,12 @@ const searchData = () => {
         <q-card-section>
 
             <div>
-                <q-input dense outlined placeholder="Ketik NO KK atau Nama" class="q-mb-sm" v-model="query.search"
-                    label="Search" @keydown.enter.prevent="searchData">
+                <q-input dense outlined placeholder="NO KK atau Nama" class="q-mb-sm" v-model="query.search"
+                    label="Search" @keydown.enter.prevent="searchData" clearable @clear="router.visit(index())">
                     <template v-slot:append>
-                        <q-btn size="11px" :disable="!query.search" color="dark" label="Search"
+                        <q-btn size="11px" :disable="!query.search" color="dark" icon="search" flat dense
                             @click="searchData"></q-btn>
-                        <q-btn size="11px" color="red" label="Reset" @click="router.visit(index())"></q-btn>
+                        <!-- <q-btn size="11px" color="red" label="Reset" @click="router.visit(index())"></q-btn> -->
                     </template>
                 </q-input>
                 <div class="table-responsive">
