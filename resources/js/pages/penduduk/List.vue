@@ -43,12 +43,12 @@ const searchData = () => {
    <q-card class="section">
       <q-card-section>
 
-
          <q-input dense outlined placeholder="Ketik NIK, KK atau Nama" class="q-mb-sm" v-model="query.search"
-            label="Search" @keydown.enter.prevent="searchData">
+            label="Search" @keydown.enter.prevent="searchData" clearable @clear="router.visit(list())">
             <template v-slot:append>
-               <q-btn size="11px" :disable="!query.search" color="dark" label="Search" @click="searchData"></q-btn>
-               <q-btn size="11px" color="red" label="Reset" @click="router.visit(list())"></q-btn>
+               <q-btn size="11px" :disable="!query.search" color="dark" icon="search" flat dense
+                  @click="searchData"></q-btn>
+               <!-- <q-btn size="11px" color="red" label="Reset" @click="router.visit(list())"></q-btn> -->
             </template>
          </q-input>
          <!-- <AppPagination v-bind="data"></AppPagination> -->
@@ -59,7 +59,7 @@ const searchData = () => {
                   <tr>
                      <th class="text-left">#</th>
                      <th class="text-left uppercase" v-for="(item, i) in columns" :key="i">{{ item.split('_').join(' ')
-                        }}</th>
+                     }}</th>
                   </tr>
                </thead>
                <tbody>
