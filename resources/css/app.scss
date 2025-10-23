@@ -1,0 +1,128 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   line-height: normal;
+   margin-top: 0;
+}
+
+.page-header {
+   margin-top: .8rem;
+   margin-bottom: 1.5rem;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+
+   h1 {
+      font-size: 2rem;
+      margin-bottom: 0;
+   }
+}
+
+.uppercase {
+   text-transform: uppercase;
+}
+
+.card-lg {
+   width: 100%;
+   max-width: 570px;
+}
+
+.card-md {
+   width: 100%;
+   max-width: 400px;
+}
+
+.card-title {
+   margin-bottom: 1rem;
+   font-size: 1.2rem;
+}
+
+.card-subtitle {
+   margin-bottom: .6rem;
+   font-size: 1rem;
+}
+
+table.table {
+   border-spacing: 0;
+
+   thead>tr>th {
+      background-color: rgb(243, 243, 243);
+   }
+
+   tr>td,
+   tr>th {
+      padding: 3px 12px;
+   }
+
+   tr>th {
+      text-align: left;
+   }
+
+   &.bordered {
+      tr:not(:last-child)>td {
+         border-bottom: 1px solid #e4e4e4;
+      }
+   }
+}
+
+.btn-action {
+   font-size: 12.5px;
+   line-height: 1.715em;
+   padding: 4px 16px;
+   min-height: 2.4em;
+}
+
+.grid {
+   display: grid;
+}
+
+.grid-cols-2 {
+   grid-template-columns: 1fr 1fr;
+}
+
+.gap-4 {
+   gap: 12px;
+}
+
+.table-responsive {
+   width: 100%;
+   overflow-x: auto;
+
+   table {
+      width: 100%;
+   }
+}
+
+.text-md {
+   font-size: 1rem;
+}
+
+.text-lg {
+   font-size: 1.3rem;
+}
+.flex-1 {
+   flex: 1;
+}
+
+.text-xl {
+   font-size: 1.8rem;
+}
+
+.no-wrap,
+.text-nowrap {
+   text-wrap: nowrap;
+}
+
+.q-card {
+   &.section {
+      box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1), 0px 12px 13px -10px rgba(0, 0, 0, 0.1);
+      @media (min-width: 1024px) {
+         .q-card__section--vert {
+            padding: 20px 18px;
+         }
+      }
+   }
+}
