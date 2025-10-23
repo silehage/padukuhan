@@ -67,6 +67,12 @@ onMounted(async () => {
 
 <style scoped>
 canvas {
-  max-width: 300px;
+  max-width: 100%;
+}
+@media (min-width: 1024px) {
+  canvas {
+    max-width: 300px;
+  }
+  
 }
 </style>
