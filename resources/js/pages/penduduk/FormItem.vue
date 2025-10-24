@@ -9,9 +9,9 @@ const props = defineProps(['data', 'item'])
 
 const formAction = computed(() => {
     if (props.item) {
-        return updateItem({ id: props.data.id, itemId: props.item.id })
+        return updateItem.form({ id: props.data.id, itemId: props.item.id })
     } else {
-        return storeItem(props.data.id)
+        return storeItem.form(props.data.id)
     }
 })
 
