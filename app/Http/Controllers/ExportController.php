@@ -110,7 +110,7 @@ class ExportController extends Controller
 
         $dompdf = Pdf::loadView('pdf.inventaris', compact('data'));
         $dompdf->setPaper('a4', 'landscape');
-        $filename = 'BUKU_KAS_RT_05';
+        $filename = 'BUKU_INVENTARIS_RT_05';
         return $dompdf->stream($filename);
 
 
