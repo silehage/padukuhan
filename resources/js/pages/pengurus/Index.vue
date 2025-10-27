@@ -1,5 +1,6 @@
 <script setup>
 
+import { searchPenduduk } from '@/routes/api';
 import { create, assignPengurus, index } from '@/routes/pengurus';
 import { router, useForm } from '@inertiajs/vue3';
 import { reactive, ref } from 'vue';
@@ -43,19 +44,24 @@ const searchData = () => {
     router.visit(index({ query: query }))
 }
 
-const penduduk_options = ref(props.penduduk)
+const penduduk_options = ref([])
 
-const filterFn = (val, update) => {
+const filterFn = async (val, update) => {
     if (!val || val == '') {
         update(() => {
-            penduduk_options.value = props.penduduk
+            penduduk_options.value = []
         })
         return
     }
 
+    const response = await fetch(searchPenduduk(val).url)
+    const result = await response.json()
+
+
     update(() => {
-        const needle = val.toLowerCase()
-        penduduk_options.value = props.penduduk.filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+         penduduk_options.value = result.map(el => ({label: el.nama_lengkap, value: el.id}))
+        // const needle = val.toLowerCase()
+        // penduduk_options.value = props.penduduk.filter(v => v.label.toLowerCase().indexOf(needle) > -1)
     })
 }
 
@@ -133,11 +139,12 @@ const filterFn = (val, update) => {
             <q-card-section>
                 <div class="card-title">Update Pengurus</div>
                 <q-form @submit="submitData">
-                    <q-select use-input :disable="isEdit" emit-value map-options v-model="form.penduduk_id"
+                    <q-select debounce="700" use-input :disable="isEdit" emit-value map-options v-model="form.penduduk_id"
                         label="Nama Pengurus" :options="penduduk_options" @filter="filterFn"></q-select>
                     <q-select emit-value map-options v-model="form.pengurus_id" label="Jabatan"
                         :options="[{ label: 'Pilih', value: '' }, ...options]"></q-select>
-                    <q-btn :loading="form.processing" class="full-width q-mt-lg" type="submit" label="Submit Data" color="primary"></q-btn>
+                    <q-btn :loading="form.processing" class="full-width q-mt-lg" type="submit" label="Submit Data"
+                        color="primary"></q-btn>
                 </q-form>
             </q-card-section>
         </q-card>

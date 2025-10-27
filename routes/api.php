@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/chart/usia', [PendudukController::class, 'getUsiaChart'])->name('api.getChartUsia');
+Route::get('/search-penduduk/{key}', [PendudukController::class, 'search'])->name('api.searchPenduduk');

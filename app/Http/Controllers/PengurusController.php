@@ -63,14 +63,6 @@ class PengurusController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'penduduk_id' => 'required',
-            'pengurus_id' => 'nullable',
-        ]);
-
-        Penduduk::where('id', $request->penduduk_id)->update([
-            'pengurus_id' => $request->pengurus_id ?? NULL
-        ]);;
 
         return to_route('pengurus.index');
     }
@@ -85,6 +77,8 @@ class PengurusController extends Controller
         Penduduk::where('id', $request->penduduk_id)->update([
             'pengurus_id' => $request->pengurus_id ?? NULL
         ]);;
+
+        $this->clearCache();
 
         return back();
     }
@@ -119,5 +113,11 @@ class PengurusController extends Controller
     public function destroy(Pengurus $pengurus)
     {
         //
+    }
+
+    protected function clearCache()
+    {
+        Cache::forget('pengurus_potions');
+        Cache::forget('penduduk_options');
     }
 }

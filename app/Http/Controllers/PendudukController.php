@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Cache;
 
 class PendudukController extends Controller
 {
-
+    public function search($key)
+    {
+        $data = Penduduk::where('nama_lengkap', 'like', '%' . $key . '%')->get();
+        return response()->json($data);
+    }
     public function list(Request $request)
     {
         $data = Penduduk::select(
