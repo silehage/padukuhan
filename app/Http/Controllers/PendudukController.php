@@ -16,7 +16,7 @@ class PendudukController extends Controller
 {
     public function search($key)
     {
-        $data = Penduduk::where('nama_lengkap', 'like', '%' . $key . '%')->get();
+        $data = Penduduk::select('id', 'nama_lengkap', 'pendidikan')->where('nama_lengkap', 'like', '%' . $key . '%')->get();
         return response()->json($data);
     }
     public function list(Request $request)
