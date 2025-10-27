@@ -7,6 +7,7 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\InventarisControllers;
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\PendudukController;
+use App\Http\Controllers\PengurusController;
 
 Route::get('/', function () {
     return to_route('login');
@@ -30,6 +31,9 @@ Route::middleware(['auth'])->group(function() {
     Route::get('kas/bulk', [KasController::class, 'bulkCreate'])->name('kas.bulkCreate');
     Route::post('kas/bulk', [KasController::class, 'bulkStore'])->name('kas.bulkStore');
     Route::resource('kas', KasController::class);
+    
+    Route::post('pengurus/assignPengurus', [PengurusController::class, 'assignPengurus'])->name('pengurus.assignPengurus');
+    Route::resource('pengurus', PengurusController::class);
 });
 
 require __DIR__.'/auth.php';

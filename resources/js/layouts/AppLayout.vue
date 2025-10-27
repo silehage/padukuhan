@@ -46,6 +46,7 @@ import { dashboard } from '@/routes';
 import penduduk from '@/routes/penduduk';
 import { router } from '@inertiajs/vue3';
 import inventaris from '@/routes/inventaris';
+import pengurus from '@/routes/pengurus';
 import kas from '@/routes/kas';
 import { logout } from '@/routes';
 import { useQuasar } from 'quasar';
@@ -101,6 +102,11 @@ const navItems = [
     title: 'Inventaris',
     href: inventaris.index(),
     icon: 'inventory'
+  },
+  {
+    title: 'Pengurus',
+    href: pengurus.index(),
+    icon: 'groups'
   },
 ]
 
