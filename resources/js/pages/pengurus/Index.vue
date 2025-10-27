@@ -137,7 +137,7 @@ const filterFn = (val, update) => {
                         label="Nama Pengurus" :options="penduduk_options" @filter="filterFn"></q-select>
                     <q-select emit-value map-options v-model="form.pengurus_id" label="Jabatan"
                         :options="[{ label: 'Pilih', value: '' }, ...options]"></q-select>
-                    <q-btn class="full-width q-mt-lg" type="submit" label="Submit Data" color="primary"></q-btn>
+                    <q-btn :loading="form.processing" class="full-width q-mt-lg" type="submit" label="Submit Data" color="primary"></q-btn>
                 </q-form>
             </q-card-section>
         </q-card>
