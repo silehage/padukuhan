@@ -82,11 +82,15 @@ class PendudukController extends Controller
     }
     public function storeItem(PendudukRequest $request, $id)
     {
-        $data = KartuKeluarga::find($id);
-        $validated = $request->validated();
-        // dd($validated);
-        $data->items()->create($validated);
-        return redirect()->route('penduduk.show', $id);
+        try {
+            $data = KartuKeluarga::find($id);
+            $validated = $request->validated();
+            // dd($validated);
+            $data->items()->create($validated);
+            return redirect()->route('penduduk.show', $id); 
+        } catch (\Throwable $th) {
+            return back()->withErrors($th->getMessage());
+        }
     }
     public function updateItem(PendudukRequest $request, $id, $itemId)
     {
