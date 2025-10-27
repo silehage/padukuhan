@@ -77,7 +77,7 @@ const can = (ability) => {
                                 <td class="q-gutter-xs no-wrap">
                                     <q-btn v-if="can('Update')" class="btn-action" no-caps color="blue"
                                         @click="router.get(edit(item.id))">Edit</q-btn color="blue">
-                                    <q-btn class="btn-action" color="teal"
+                                    <q-btn class="btn-action" color="teal" no-caps
                                         @click="router.get(show(item.id))">Anggota</q-btn>
                                 </td>
                             </tr>
