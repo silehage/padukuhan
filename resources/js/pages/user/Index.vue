@@ -19,7 +19,7 @@ const handleAdd = () => {
 
 const handleEdit = (user) => {
    selectedEdit.value = user
-    isUpdatePassword.value = false
+   isUpdatePassword.value = false
 
    modal.value = true
 }
@@ -28,7 +28,11 @@ import { guard } from '@/lib/utils';
 import Select from '@/components/Select.vue';
 const module = 'User'
 const can = (ability) => {
-    return guard(`${ability} ${module}`)
+   return guard(`${ability} ${module}`)
+}
+
+const handleFinish = () => {
+   modal.value = false
 }
 
 </script>
@@ -65,8 +69,8 @@ const can = (ability) => {
                         <td>{{ item.email }}</td>
                         <td>{{ item.role ? item.role.name : '-' }}</td>
                         <td class="q-gutter-xs no-wrap">
-                           <q-btn v-if="can('Update')" class="btn-action" no-caps color="blue" @click="handleEdit(item)">Edit</q-btn
-                              color="blue">
+                           <q-btn v-if="can('Update')" class="btn-action" no-caps color="blue"
+                              @click="handleEdit(item)">Edit</q-btn color="blue">
                         </td>
                      </tr>
                      <tr v-if="!data.total">
@@ -91,11 +95,14 @@ const can = (ability) => {
                <div>Form User</div>
                <q-btn flat round icon="close" v-close-popup></q-btn>
             </div>
-            <Form v-bind="store()" v-slot="{ errors, processing }" autocomplete="off">
+            <Form v-bind="store()" v-slot="{ errors, processing }" autocomplete="off" :options="{
+               preserveScroll: false,
+               preserveState: false,
+            }" @finish="handleFinish">
                <div class="q-gutter-sm">
                   <div>
-                     <Input :defaultValue="selectedEdit ? selectedEdit.name : ''" label="Nama" id="name"
-                        name="name" autocomplete="off"></Input>
+                     <Input :defaultValue="selectedEdit ? selectedEdit.name : ''" label="Nama" id="name" name="name"
+                        autocomplete="off"></Input>
                      <InputError :message="errors.name" />
                   </div>
                   <div>
@@ -113,7 +120,8 @@ const can = (ability) => {
                         @click="isUpdatePassword = !isUpdatePassword" v-if="!isUpdatePassword"></q-btn>
                   </div>
                   <template v-if="isUpdatePassword">
-                     <Input label="Password" id="password" name="password" type="password" autocomplete="new-password"></Input>
+                     <Input label="Password" id="password" name="password" type="password"
+                        autocomplete="new-password"></Input>
                      <div>
                         <Input label="Ulangi Password" id="password_confirmation" name="password_confirmation"
                            type="password_confirmation" autocomplete=""></Input>
@@ -123,7 +131,8 @@ const can = (ability) => {
                   </template>
                </div>
 
-               <q-btn :loading="processing" label="Submit" color="primary" class="full-width q-mt-lg"></q-btn>
+               <q-btn :loading="processing" label="Submit" type="submit" color="primary"
+                  class="full-width q-mt-lg"></q-btn>
 
             </Form>
          </q-card-section>
