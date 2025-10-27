@@ -9,7 +9,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function guard(ability) {
-    console.log(ability);
     
     if(ability == 'All') {
         return true;

@@ -81,7 +81,7 @@ const can = (ability) => {
                             </tr>
                             <tr>
                                 <th class="bg-grey-1" colspan="2"></th>
-                                <th class="bg-grey-1">Saldo Kas Akhir Bulan</th>
+                                <th class="bg-grey-1">Saldo Kas Akhir</th>
                                 <th class="bg-grey-1">{{ data.total_masuk - data.total_keluar }}</th>
                                 <th class="bg-grey-1"></th>
 
