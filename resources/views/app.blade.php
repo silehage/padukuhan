@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id_ID"  @class(['dark' => ($appearance ?? 'system') == 'dark'])>
+<html lang="id-ID"  @class(['dark' => ($appearance ?? 'system') == 'dark'])>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
