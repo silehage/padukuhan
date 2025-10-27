@@ -17,6 +17,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('export/excel', [ExportController::class, 'exportExcel'])->name('exportExcel');
     Route::get('export/pdf', [ExportController::class, 'exportPdf'])->name('exportPdf');
     Route::get('export/kas', [ExportController::class, 'exportKas'])->name('exportKas');
+    Route::get('export/inventaris', [ExportController::class, 'exportInventaris'])->name('exportInventaris');
     
     Route::get('penduduk/list',[PendudukController::class, 'list'])->name('penduduk.list');
     Route::get('penduduk/{id}/createItem',[PendudukController::class, 'createItem'])->name('penduduk.createItem');

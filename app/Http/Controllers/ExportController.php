@@ -96,4 +96,24 @@ class ExportController extends Controller
 
         return response()->json($result);
     }
+    public function exportInventaris()
+    {
+        $tahun = 2024;
+
+        // Ambil data kas tahun 2024
+        $data = DB::table('inventaris')
+            ->whereYear('tanggal', '<=' ,$tahun)
+            ->orderBy('tanggal', 'asc')
+            ->get();
+
+        // return view('pdf.inventaris', compact('data'));
+
+        $dompdf = Pdf::loadView('pdf.inventaris', compact('data'));
+        $dompdf->setPaper('a4', 'landscape');
+        $filename = 'BUKU_KAS_RT_05';
+        return $dompdf->stream($filename);
+
+
+        return response()->json($result);
+    }
 }

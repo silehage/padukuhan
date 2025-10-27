@@ -1,5 +1,6 @@
 <script setup lang="ts">
 
+import { exportInventaris } from '@/routes';
 import { create, edit, destroy } from '@/routes/inventaris';
 import { router } from '@inertiajs/vue3';
 
@@ -12,6 +13,7 @@ defineProps(['data'])
     <AppHeader title="Inventaris">
         <div class="flex justify-end q-gutter-sm">
             <q-btn color="primary" @click="router.visit(create())">Tambah Data</q-btn>
+            <q-btn label="Export" color="teal" :href="exportInventaris().url"></q-btn>
         </div>
     </AppHeader>
 

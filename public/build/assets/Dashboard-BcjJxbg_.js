@@ -1,4 +1,4 @@
-import{q as wn,r as Fs,o as Es,c as ti,a as ei,b as rt,d as An,e as B,w as Y,Q as xi,f as yi,g as ae,h as vi,t as ki,F as Pn}from"./app-Cii_3Tgs.js";import{Q as re,a as le}from"./QCard--a7ZkqPg.js";/*!
+import{q as wn,r as Fs,o as Es,c as ti,a as ei,b as rt,d as An,e as B,w as Y,Q as xi,f as yi,g as ae,h as vi,t as ki,F as Pn}from"./app-CwLZir8c.js";import{Q as re,a as le}from"./QCard-A2agXTu3.js";/*!
  * @kurkle/color v0.3.4
  * https://github.com/kurkle/color#readme
  * (c) 2024 Jukka Kurkela
