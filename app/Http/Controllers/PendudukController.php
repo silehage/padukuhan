@@ -91,7 +91,7 @@ class PendudukController extends Controller
             $validated = $request->validated();
             // dd($validated);
             $data->items()->create($validated);
-            return redirect()->route('penduduk.show', $id); 
+            return redirect()->route('penduduk.show', $id);
         } catch (\Throwable $th) {
             return back()->withErrors($th->getMessage());
         }
@@ -196,6 +196,20 @@ class PendudukController extends Controller
         return response()->json([
             'labels' => ['Anak-anak (0-12)', 'Remaja (13-17)', 'Dewasa (18-59)', 'Orang Tua (60+)'],
             'data' => [$anak, $remaja, $dewasa, $orangtua],
+        ]);
+    }
+    public function getJenisKelaminChart()
+    {
+        $data = Cache::remember('jenis_kelamin_chart', 1000, function () {
+            return [
+                'laki' => DB::table('penduduk')->where('jenis_kelamin', 'like', 'laki%')->count(),
+                'perempuan' => DB::table('penduduk')->where('jenis_kelamin', 'like', 'perempuan%')->count()
+            ];
+        });
+
+        return response()->json([
+            'labels' => ['Laki Laki', 'Perempuan'],
+            'data' => [$data['laki'], $data['perempuan']]
         ]);
     }
 }

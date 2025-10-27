@@ -1,6 +1,6 @@
 <template>
   <div class="flex column items-center q-py-md">
-    <h2 class="text-md text-weight-semibold q-mb-md">Diagram Usia Penduduk</h2>
+    <h2 class="text-md text-weight-semibold q-mb-md">Diagram Jenis Kelamin</h2>
     <canvas ref="chartCanvas" width="300" height="300"></canvas>
   </div>
 </template>
@@ -8,7 +8,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { Chart, ArcElement, Tooltip, Legend, PieController, DoughnutController } from 'chart.js'
-import { getChartUsia } from '@/routes/api'
+import {  getJenisKelaminChart } from '@/routes/api'
 
 // ✅ Registrasi semua komponen Chart.js yang dibutuhkan
 Chart.register(ArcElement, Tooltip, Legend, PieController, DoughnutController)
@@ -18,7 +18,7 @@ let chartInstance = null
 
 onMounted(async () => {
   try {
-    const response = await fetch(getChartUsia().url)
+    const response = await fetch(getJenisKelaminChart().url)
     const result = await response.json()
 
     if (chartInstance) chartInstance.destroy()
@@ -30,13 +30,13 @@ onMounted(async () => {
         labels: result.labels,
         datasets: [
           {
-            label: 'Jumlah Penduduk',
+            label: 'Jumlah Penduduk Berdasarkan Jenis Kelamin',
             data: result.data,
             backgroundColor: [
               '#60A5FA', // Anak-anak
               '#FBBF24', // Remaja
               '#34D399', // Dewasa
-              '#F87171'  // Orang Tua
+              '#F87171', // Orang Tua
             ],
             borderColor: '#fff',
             borderWidth: 2,

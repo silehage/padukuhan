@@ -1,6 +1,6 @@
 <template>
   <div class="flex column items-center q-py-md">
-    <h2 class="text-md text-weight-semibold q-mb-md">Grafik Usia Penduduk (Bar)</h2>
+    <h2 class="text-md text-weight-semibold q-mb-md">Grafik Usia Penduduk</h2>
     <canvas ref="chartCanvas" ></canvas>
   </div>
 </template>
