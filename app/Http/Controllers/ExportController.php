@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exports\DataExport;
-use Illuminate\Http\Request;
 use App\Models\KartuKeluarga;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -16,20 +15,33 @@ class ExportController extends Controller
     {
         return Excel::download(new DataExport, 'penduduk-rt-05.xlsx');
     }
-    public function exportPdf()
+    public function dataIndukPadukuhan()
     {
         $data = KartuKeluarga::with('items')->get();
 
-        // return view('pdf.list', compact('data'));
+        // return view('pdf.dataIndukPadukuhan', compact('data'));
 
-        // $dimensions =  array(0, 0, ,210, 330);
-
-        $dompdf = Pdf::loadView('pdf.list', compact('data'));
-        $dompdf->setPaper('letter', 'landscape');
+        $dompdf = Pdf::loadView('pdf.dataIndukPadukuhan', compact('data'));
+        // $dimensions =  [0, 0, 612, 792];
+        $dimensions =  array(0, 0, 610, 936);
+        $dompdf->setPaper($dimensions, 'landscape');
         $filename = 'BUKU_INDUK_PADUKUHAN_RT_05';
         return $dompdf->stream($filename);
+    }
+    public function dataIndukPenduduk()
+    {
+        $data = KartuKeluarga::with('items')->get();
+        // return view('pdf.dataIndukPenduduk', compact('data'));
 
-        return view('pdf.list', compact('data'));
+
+
+        $dompdf = Pdf::loadView('pdf.dataIndukPenduduk', compact('data'));
+        // $dimensions =  [0, 0, 612, 792];
+          $dimensions =  array(0, 0, 610, 936);
+        $dompdf->setPaper($dimensions, 'landscape');
+        // $dompdf->setPaper('letter', 'landscape');
+        $filename = 'BUKU_INDUK_PENDUDUK_(BIP)_RT';
+        return $dompdf->stream($filename);
     }
     public function exportKas()
     {
@@ -102,7 +114,7 @@ class ExportController extends Controller
 
         // Ambil data kas tahun 2024
         $data = DB::table('inventaris')
-            ->whereYear('tanggal', '<=' ,$tahun)
+            ->whereYear('tanggal', '<=', $tahun)
             ->orderBy('tanggal', 'asc')
             ->get();
 

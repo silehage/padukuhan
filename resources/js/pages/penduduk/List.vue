@@ -1,6 +1,6 @@
 <script setup lang="ts">
-
-import { list } from '@/routes/penduduk';
+import { create, list } from '@/routes/penduduk'
+import { exportDataIndukPadukuhan, exportDataIndukPenduduk, exportExcel, exportPdf } from '@/routes';
 import { router } from '@inertiajs/vue3';
 import { reactive } from 'vue';
 
@@ -38,6 +38,19 @@ const searchData = () => {
 <template>
 
    <AppHeader title="Data Penduduk">
+
+      <div class="flex q-gutter-sm">
+         <q-btn-dropdown label="Export Data" color="teal">
+            <q-list separator>
+               <q-item color="teal" :href="exportExcel().url" target="_blank">ALL DATA (EXCEL)</q-item>
+               <q-item color="teal" :href="exportDataIndukPadukuhan().url" target="_blank">DATA INDUK PADUKUHAN (PDF)</q-item>
+               <q-item color="teal" :href="exportDataIndukPenduduk().url" target="_blank">DATA INDUK PENDUDUK (PDF)</q-item>
+            </q-list>
+         </q-btn-dropdown>
+         <!-- <q-btn color="primary" @click="router.visit(create())">Tambah Data</q-btn>
+         <q-btn color="teal" :href="exportExcel().url" target="_blank">Export Excel</q-btn>
+         <q-btn color="teal" :href="exportPdf().url" target="_blank">Export PDF</q-btn> -->
+      </div>
    </AppHeader>
 
    <q-card class="section">
@@ -59,7 +72,7 @@ const searchData = () => {
                   <tr>
                      <th class="text-left">#</th>
                      <th class="text-left uppercase" v-for="(item, i) in columns" :key="i">{{ item.split('_').join(' ')
-                     }}</th>
+                        }}</th>
                   </tr>
                </thead>
                <tbody>

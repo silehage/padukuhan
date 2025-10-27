@@ -15,7 +15,8 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('export/excel', [ExportController::class, 'exportExcel'])->name('exportExcel');
-    Route::get('export/pdf', [ExportController::class, 'exportPdf'])->name('exportPdf');
+    Route::get('export/data-induk-padukuhan', [ExportController::class, 'dataIndukPadukuhan'])->name('exportDataIndukPadukuhan');
+    Route::get('export/data-induk-penduduk', [ExportController::class, 'dataIndukPenduduk'])->name('exportDataIndukPenduduk');
     Route::get('export/kas', [ExportController::class, 'exportKas'])->name('exportKas');
     Route::get('export/inventaris', [ExportController::class, 'exportInventaris'])->name('exportInventaris');
     

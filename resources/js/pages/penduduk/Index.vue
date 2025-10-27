@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
-import { create, index } from '@/routes/penduduk'
-import { exportExcel, exportPdf } from '@/routes';
+import { index, create } from '@/routes/penduduk'
 import { router } from '@inertiajs/vue3';
 import { edit, show } from '@/routes/penduduk';
 import { reactive } from 'vue';
@@ -21,11 +20,7 @@ const searchData = () => {
 <template>
 
     <AppHeader title="Kartu Keluarga">
-        <div class="flex q-gutter-sm">
-            <q-btn color="primary" @click="router.visit(create())">Tambah Data</q-btn>
-            <q-btn color="teal" :href="exportExcel().url">Export Excel</q-btn>
-            <q-btn color="teal" :href="exportPdf().url">Export PDF</q-btn>
-        </div>
+        <q-btn color="primary" @click="router.visit(create())">Tambah Data</q-btn>
     </AppHeader>
 
     <q-card class="section">

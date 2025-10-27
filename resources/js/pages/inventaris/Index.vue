@@ -13,7 +13,7 @@ defineProps(['data'])
     <AppHeader title="Inventaris">
         <div class="flex justify-end q-gutter-sm">
             <q-btn color="primary" @click="router.visit(create())">Tambah Data</q-btn>
-            <q-btn label="Export" color="teal" :href="exportInventaris().url"></q-btn>
+            <q-btn label="Export" color="teal" :href="exportInventaris().url" target="_blank"></q-btn>
         </div>
     </AppHeader>
 

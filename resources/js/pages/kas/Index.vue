@@ -23,7 +23,7 @@ const getData = () => {
         <div class="flex q-gutter-sm">
             <q-btn color="primary" @click="router.visit(create())">Tambah Data</q-btn>
             <q-btn color="blue" @click="router.visit(bulkCreate())">Tambah Bulk</q-btn>
-            <q-btn color="teal" :href="exportKas().url">Export</q-btn>
+            <q-btn color="teal" :href="exportKas().url" target="_blank">Export</q-btn>
         </div>
     </AppHeader>
 
