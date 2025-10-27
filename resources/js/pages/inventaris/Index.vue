@@ -6,13 +6,19 @@ import { router } from '@inertiajs/vue3';
 
 defineProps(['data'])
 
+
+import { guard } from '@/lib/utils';
+const module = 'Inventaris'
+const can = (ability) => {
+    return guard(`${ability} ${module}`)
+}
 </script>
 
 <template>
 
     <AppHeader title="Inventaris">
         <div class="flex justify-end q-gutter-sm">
-            <q-btn color="primary" @click="router.visit(create())">Tambah Data</q-btn>
+            <q-btn v-if="can('Create')" color="primary" @click="router.visit(create())">Tambah Data</q-btn>
             <q-btn label="Export" color="teal" :href="exportInventaris().url" target="_blank"></q-btn>
         </div>
     </AppHeader>
@@ -34,8 +40,8 @@ defineProps(['data'])
                                 <th class="text-left uppercase">Jumlah</th>
                                 <th class="text-left uppercase">Tempat Penyimpanan</th>
                                 <th class="text-left uppercase">Kondisi Barang</th>
-                                <th class="text-left uppercase">Keterangan</th>
-                                <th class="text-left uppercase">Aksi</th>
+                                <th class="text-left uppercase">Ket</th>
+                                <th class="text-left uppercase" v-if="can('Update') || can('Delete')">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,9 +55,9 @@ defineProps(['data'])
                                 <td>{{ item.kondisi_barang }}</td>
                                 <td>{{ item.keterangan }}</td>
                                 <td class="q-gutter-xs no-wrap">
-                                    <q-btn class="btn-action" no-caps color="blue"
+                                    <q-btn v-if="can('Update')" class="btn-action" no-caps color="blue"
                                         @click="router.visit(edit(item.id))">Edit</q-btn color="blue">
-                                    <q-btn class="btn-action" no-caps color="red"
+                                    <q-btn v-if="can('Delete')" class="btn-action" no-caps color="red"
                                         @click="router.visit(destroy(item.id))">Hapus</q-btn color="blue">
                                 </td>
                             </tr>

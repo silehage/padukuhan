@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import { createItem, editItem } from '@/routes/penduduk';
 defineProps(['data', 'items', 'columns'])
+
+import { guard } from '@/lib/utils';
+const module = 'Penduduk'
+const can = (ability) => {
+    return guard(`${ability} ${module}`)
+}
 </script>
 
 <template>
 
    <AppHeader title="Penduduk">
-      <q-btn color="primary" :href="createItem(data.id).url">Tambah Anggota</q-btn>
+      <q-btn v-if="can('Create')" color="primary" :href="createItem(data.id).url">Tambah Anggota</q-btn>
 
    </AppHeader>
 
@@ -37,7 +43,7 @@ defineProps(['data', 'items', 'columns'])
                         <th class="text-left">#</th>
                         <th class="text-left uppercase" v-for="col in columns" :key="col">{{ col.split('_').join(' ') }}
                         </th>
-                        <th>Aksi</th>
+                        <th v-if="can('Update')">Aksi</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -45,7 +51,7 @@ defineProps(['data', 'items', 'columns'])
                         <td>{{ 1 + idx }}</td>
                         <td v-for="(key, i) in columns" :key="i">{{ item[key] }} </td>
                         <td>
-                           <q-btn color="blue" class="btn-action"
+                           <q-btn v-if="can('Update')" color="blue" class="btn-action"
                               :href="editItem({ id: data.id, itemId: item.id }).url">Edit</q-btn>
                         </td>
                      </tr>

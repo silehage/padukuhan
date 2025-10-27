@@ -17,17 +17,19 @@
 
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered :mini="mini" :width="210">
       <q-list class="q-py-md">
-        <q-item clickable v-for="(nav, idx) in navItems" :key="idx" @click="handleClickMenu(nav.href)">
-          <q-item-section side>
-            <q-icon :name="nav.icon"></q-icon>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>{{ nav.title }}</q-item-label>
-          </q-item-section>
-          <q-tooltip v-if="mini" anchor="center right" self="center left" :offset="[10, 10]"
-            class="bg-purple text-white">{{ nav.title }}</q-tooltip>
+        <template v-for="(nav, idx) in navItems" :key="idx">
+          <q-item clickable :href="nav.href.url" @click.prevent="handleClickMenu(nav.href)" v-if="guard(nav.ability)">
+            <q-item-section side>
+              <q-icon :name="nav.icon"></q-icon>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ nav.title }}</q-item-label>
+            </q-item-section>
+            <q-tooltip v-if="mini" anchor="center right" self="center left" :offset="[10, 10]"
+              class="bg-purple text-white">{{ nav.title }}</q-tooltip>
 
-        </q-item>
+          </q-item>
+        </template>
       </q-list>
     </q-drawer>
 
@@ -48,8 +50,12 @@ import { router } from '@inertiajs/vue3';
 import inventaris from '@/routes/inventaris';
 import pengurus from '@/routes/pengurus';
 import kas from '@/routes/kas';
+import users from '@/routes/users';
 import { logout } from '@/routes';
 import { useQuasar } from 'quasar';
+
+import { guard } from '@/lib/utils';
+import permissions from '@/routes/permissions';
 
 const $q = useQuasar()
 
@@ -81,32 +87,50 @@ const navItems = [
   {
     title: 'Dashboard',
     href: dashboard(),
-    icon: 'dashboard'
+    icon: 'dashboard',
+    ability: 'All'
   },
   {
     title: 'Kartu Keluarga',
     href: penduduk.index(),
-    icon: 'list_alt'
+    icon: 'list_alt',
+    ability: 'Read Penduduk'
   },
   {
     title: 'Data Penduduk',
     href: penduduk.list(),
-    icon: 'account_box'
+    icon: 'account_box',
+    ability: 'Read Penduduk'
   },
   {
     title: 'Kas',
     href: kas.index(),
-    icon: 'account_balance'
+    icon: 'account_balance',
+    ability: 'Read Kas'
   },
   {
     title: 'Inventaris',
     href: inventaris.index(),
-    icon: 'inventory'
+    icon: 'inventory',
+    ability: 'Read Inventaris'
   },
   {
     title: 'Pengurus',
     href: pengurus.index(),
-    icon: 'groups'
+    icon: 'groups',
+    ability: 'Read Pengurus'
+  },
+  {
+    title: 'Users',
+    href: users.index(),
+    icon: 'account_circle',
+    ability: 'Read User'
+  },
+  {
+    title: 'Permissions',
+    href: permissions.index(),
+    icon: 'verified',
+    ability: 'Read Permission'
   },
 ]
 

@@ -66,13 +66,19 @@ const filterFn = async (val, update) => {
 }
 
 
+import { guard } from '@/lib/utils';
+const module = 'Pengurus'
+const can = (ability) => {
+    return guard(`${ability} ${module}`)
+}
+
 </script>
 
 <template>
 
     <AppHeader title="Susunan Pengurus">
         <div class="flex justify-end q-gutter-sm">
-            <q-btn color="primary" @click="handleCreate">Tambah Data</q-btn>
+            <q-btn v-if="can('Create')" color="primary" @click="handleCreate">Tambah Data</q-btn>
         </div>
     </AppHeader>
 
@@ -102,7 +108,7 @@ const filterFn = async (val, update) => {
                                 <th class="text-left uppercase">Tempat Lahir</th>
                                 <th class="text-left uppercase">Tanggal Lahir</th>
                                 <th class="text-left uppercase">Status</th>
-                                <th class="text-left uppercase">Aksi</th>
+                                <th class="text-left uppercase" v-if="can('Update')">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,7 +121,7 @@ const filterFn = async (val, update) => {
                                 <td>{{ item.tanggal_lahir }}</td>
                                 <td>{{ item.status_perkawinan }}</td>
                                 <td class="q-gutter-xs no-wrap">
-                                    <q-btn class="btn-action" no-caps color="blue" @click="handleEdit(item)">Edit</q-btn
+                                    <q-btn v-if="can('Update')" class="btn-action" no-caps color="blue" @click="handleEdit(item)">Edit</q-btn
                                         color="blue">
                                 </td>
                             </tr>

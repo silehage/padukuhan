@@ -4,6 +4,7 @@ import { exportKas } from '@/actions/App/Http/Controllers/ExportController';
 import { create, index, bulkCreate, edit } from '@/routes/kas';
 import { router } from '@inertiajs/vue3';
 import { reactive } from 'vue';
+import { guard } from '@/lib/utils';
 
 const props = defineProps(['data', 'queryParams'])
 
@@ -15,14 +16,19 @@ const getData = () => {
     router.visit(index({ query: query }))
 }
 
+const module = 'Kas'
+
+const can = (ability) => {
+    return guard(`${ability} ${module}`)
+}
 </script>
 
 <template>
 
     <AppHeader title="Buku Kas">
         <div class="flex q-gutter-sm">
-            <q-btn color="primary" @click="router.visit(create({query: query}))">Tambah Data</q-btn>
-            <q-btn color="blue" @click="router.visit(bulkCreate())">Tambah Bulk</q-btn>
+            <q-btn v-if="can('Create')" color="primary" @click="router.visit(create({query: query}))">Tambah Data</q-btn>
+            <q-btn v-if="can('Create')" color="blue" @click="router.visit(bulkCreate())">Tambah Bulk</q-btn>
             <q-btn color="teal" :href="exportKas().url" target="_blank">Export</q-btn>
         </div>
     </AppHeader>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -45,6 +46,7 @@ class HandleInertiaRequests extends Middleware
             'queryParams' => $request->query(),
             'auth' => [
                 'user' => $request->user(),
+                'permissions' => User::permissions()
             ],
         ];
     }

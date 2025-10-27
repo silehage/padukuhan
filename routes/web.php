@@ -8,6 +8,8 @@ use App\Http\Controllers\InventarisControllers;
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\PengurusController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return to_route('login');
@@ -34,6 +36,9 @@ Route::middleware(['auth'])->group(function() {
     
     Route::post('pengurus/assignPengurus', [PengurusController::class, 'assignPengurus'])->name('pengurus.assignPengurus');
     Route::resource('pengurus', PengurusController::class);
+    Route::resource('users', UserController::class);
+    Route::post('togglePermission', [PermissionController::class, 'togglePermission'])->name('permissions.togglePermission');
+    Route::resource('permissions', PermissionController::class);
 });
 
 require __DIR__.'/auth.php';

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 
 import { index, create } from '@/routes/penduduk'
 import { router } from '@inertiajs/vue3';
@@ -15,12 +15,19 @@ const searchData = () => {
     router.visit(index({ query: query }))
 }
 
+import { guard } from '@/lib/utils';
+const module = 'Penduduk'
+const can = (ability) => {
+    return guard(`${ability} ${module}`)
+}
+
+
 </script>
 
 <template>
 
     <AppHeader title="Kartu Keluarga">
-        <q-btn color="primary" @click="router.visit(create())">Tambah Data</q-btn>
+        <q-btn v-if="can('Create')" color="primary" @click="router.visit(create())">Tambah Data</q-btn>
     </AppHeader>
 
     <q-card class="section">
@@ -68,7 +75,7 @@ const searchData = () => {
                                 <td>{{ item.provinsi }}</td>
                                 <td>{{ item.kodepos }}</td>
                                 <td class="q-gutter-xs no-wrap">
-                                    <q-btn class="btn-action" no-caps color="blue"
+                                    <q-btn v-if="can('Update')" class="btn-action" no-caps color="blue"
                                         @click="router.get(edit(item.id))">Edit</q-btn color="blue">
                                     <q-btn class="btn-action" color="teal"
                                         @click="router.get(show(item.id))">Detail</q-btn>
