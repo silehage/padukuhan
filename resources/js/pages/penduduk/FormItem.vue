@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Input from '@/components/Input.vue';
+import Select from '@/components/Select.vue';
 import InputError from '@/components/InputError.vue';
 import { Head, Form } from '@inertiajs/vue3';
 import { computed } from 'vue';
@@ -56,14 +57,15 @@ const rows = [
 
             <div class="">
                 <table class="table">
-                    <tr>
-                        <td>NOMOR KK</td>
-                        <td>{{ data.nomor }}</td>
-                    </tr>
-                    <tr>
-                        <td>KEPALA KELUARGA</td>
+                     <tr>
+                        <td>NAMA KEPALA KELUARGA</td>
                         <td>{{ data.kepala_keluarga }}</td>
                     </tr>
+                    <tr>
+                        <td>NOMOR KARTU KELUARGA</td>
+                        <td>{{ data.nomor }}</td>
+                    </tr>
+                   
                     <tr>
                         <td>ALAMAT</td>
                         <td>{{ data.alamat }}</td>
@@ -78,13 +80,10 @@ const rows = [
                         <div class="mt-3">
                             <div class="grid gap-4">
                                 <div class="grid gap-2" v-for="(row, idx) in rows" :key="idx">
-                                    <select :label="row.name.toUpperCase().split('_').join(' ')"
-                                        v-if="row.type == 'select'" :id="row.name" :name="row.name"
+                                    <Select :label="row.name.toUpperCase().split('_').join(' ')" :options="row.options"
+                                        v-if="row.type == 'select'" :id="row.name" :name="row.name" :default-value="row.default"
                                         :required="row.required" class="">
-                                        <option v-for="opt in row.options" :value="opt.value"
-                                            :selected="opt.value == row.default">
-                                            {{ opt.label }}</option>
-                                    </select>
+                                    </Select>
                                     <Input :label="row.name.toUpperCase().split('_').join(' ')"
                                         :default-value="row.default" v-else-if="row.type == 'date'"
                                         placeholder="DD-MM-YYYY" :id="row.name" type="'text'" :name="row.name"
