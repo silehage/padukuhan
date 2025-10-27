@@ -105,7 +105,7 @@ const formAction = computed(() => {
             <Form v-bind="formAction" v-slot="{ errors, processing }" autocomplete="off" :options="{
                preserveScroll: false,
                preserveState: false,
-            }" @finish="handleFinish">
+            }" @success="handleFinish">
                <div class="q-gutter-sm">
                   <div>
                      <Input :defaultValue="selectedEdit ? selectedEdit.name : ''" label="Nama" id="name" name="name"
