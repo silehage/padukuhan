@@ -37,9 +37,9 @@ const handleFinish = () => {
 
 const formAction = computed(() => {
    if(selectedEdit.value) {
-      return update().form(selectedEdit.value.id)
+      return update.form(selectedEdit.value.id)
    }
-   return store().form()
+   return store.form()
 })
 
 </script>
@@ -102,10 +102,7 @@ const formAction = computed(() => {
                <div>Form User</div>
                <q-btn flat round icon="close" v-close-popup></q-btn>
             </div>
-            <Form v-bind="formAction" v-slot="{ errors, processing }" autocomplete="off" :options="{
-               preserveScroll: false,
-               preserveState: false,
-            }" @success="handleFinish">
+            <Form v-bind="formAction" v-slot="{ errors, processing }" autocomplete="off" @success="handleFinish">
                <div class="q-gutter-sm">
                   <div>
                      <Input :defaultValue="selectedEdit ? selectedEdit.name : ''" label="Nama" id="name" name="name"
