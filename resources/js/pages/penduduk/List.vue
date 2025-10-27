@@ -77,7 +77,7 @@ const searchData = () => {
                </thead>
                <tbody>
                   <tr v-for="(item, idx) in data.data" :key="idx">
-                     <td>{{ 1 + idx }}</td>
+                     <td>{{ data.from + idx }}</td>
                      <td v-for="(val, key) in item" :key="key" style="min-width:100px">{{ val }}</td>
                   </tr>
                </tbody>

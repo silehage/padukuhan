@@ -40,7 +40,7 @@ defineProps(['data'])
                         </thead>
                         <tbody>
                             <tr v-for="(item, idx) in data.data" :key="idx">
-                                <td>{{ 1 + idx }}</td>
+                                <td>{{ data.from + idx }}</td>
                                 <td>{{ item.nama_barang }}</td>
                                 <td>{{ item.asal_barang }}</td>
                                 <td class="text-nowrap">{{ item.tanggal }}</td>

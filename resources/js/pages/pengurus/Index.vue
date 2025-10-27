@@ -107,7 +107,7 @@ const filterFn = async (val, update) => {
                         </thead>
                         <tbody>
                             <tr v-for="(item, idx) in data.data" :key="idx">
-                                <td>{{ 1 + idx }}</td>
+                                <td>{{ data.from + idx }}</td>
                                 <td>{{ item.nama_lengkap }}</td>
                                 <td>{{ item.jabatan }}</td>
                                 <td>{{ item.Jenis_kelamin }}</td>

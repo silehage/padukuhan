@@ -49,7 +49,7 @@ const getData = () => {
                         </thead>
                         <tbody>
                             <tr v-for="(item, idx) in data.items" :key="idx">
-                                <td>{{ 1 + idx }}</td>
+                                <td>{{ data.from + idx }}</td>
                                 <td class="text-nowrap">{{ item.tanggal }}</td>
                                 <td>{{ item.keterangan }}</td>
                                 <td>
