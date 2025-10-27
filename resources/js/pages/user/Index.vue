@@ -1,8 +1,8 @@
 <script setup>
 import Input from '@/components/Input.vue';
 import InputError from '@/components/InputError.vue';
-import { store } from '@/routes/users';
-import { ref } from 'vue';
+import { store, update } from '@/routes/users';
+import { computed, ref } from 'vue';
 import { Form } from '@inertiajs/vue3';
 
 defineProps(['data', 'roles'])
@@ -34,6 +34,13 @@ const can = (ability) => {
 const handleFinish = () => {
    modal.value = false
 }
+
+const formAction = computed(() => {
+   if(selectedEdit.value) {
+      return update().form(selectedEdit.value.id)
+   }
+   return store().form()
+})
 
 </script>
 
@@ -95,7 +102,7 @@ const handleFinish = () => {
                <div>Form User</div>
                <q-btn flat round icon="close" v-close-popup></q-btn>
             </div>
-            <Form v-bind="store()" v-slot="{ errors, processing }" autocomplete="off" :options="{
+            <Form v-bind="formAction" v-slot="{ errors, processing }" autocomplete="off" :options="{
                preserveScroll: false,
                preserveState: false,
             }" @finish="handleFinish">
@@ -120,7 +127,7 @@ const handleFinish = () => {
                         @click="isUpdatePassword = !isUpdatePassword" v-if="!isUpdatePassword"></q-btn>
                   </div>
                   <template v-if="isUpdatePassword">
-                     <Input label="Password" id="password" name="password" type="password"
+                     <Input label="Password" id="password" name="password" 
                         autocomplete="new-password"></Input>
                      <div>
                         <Input label="Ulangi Password" id="password_confirmation" name="password_confirmation"
