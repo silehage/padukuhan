@@ -8,7 +8,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { Chart, ArcElement, Tooltip, Legend, PieController, DoughnutController } from 'chart.js'
-import {  getJenisKelaminChart } from '@/routes/api'
+import { getJenisKelaminChart } from '@/routes/penduduk'
 
 // ✅ Registrasi semua komponen Chart.js yang dibutuhkan
 Chart.register(ArcElement, Tooltip, Legend, PieController, DoughnutController)
@@ -18,7 +18,9 @@ let chartInstance = null
 
 onMounted(async () => {
   try {
+
     const response = await fetch(getJenisKelaminChart().url)
+
     const result = await response.json()
 
     if (chartInstance) chartInstance.destroy()
@@ -69,10 +71,11 @@ onMounted(async () => {
 canvas {
   max-width: 100%;
 }
+
 @media (min-width: 1024px) {
   canvas {
     max-width: 300px;
   }
-  
+
 }
 </style>

@@ -5,15 +5,17 @@ namespace App\Http\Controllers\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Requests\Auth\LoginRequest;
 
 class AuthenticatedSessionController extends Controller
 {
-   /**
+    /**
      * Show the login page.
      */
     public function create(Request $request): Response
@@ -33,6 +35,10 @@ class AuthenticatedSessionController extends Controller
 
         Auth::login($user, $request->boolean('remember'));
 
+        $token = $user->createToken('Api', ['*'], now()->addDay())->plainTextToken;
+
+        session(['token' => $token]);
+
         $request->session()->regenerate();
 
         return redirect()->intended(route('dashboard', absolute: false));
@@ -47,6 +53,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        DB::table('personal_access_tokens')->where('expires_at', '<', now())->delete();
 
         return redirect('/');
     }

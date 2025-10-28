@@ -8,7 +8,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { Chart, BarElement, CategoryScale, LinearScale, Tooltip, Legend, BarController } from 'chart.js'
-import { getChartUsia } from '@/routes/api'
+import { getUsiaChart } from '@/routes/penduduk'
 
 // ✅ Registrasi komponen yang dibutuhkan untuk bar chart
 Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, BarController)
@@ -18,7 +18,12 @@ let chartInstance = null
 
 onMounted(async () => {
   try {
-    const response = await fetch(getChartUsia().url)
+    // const response = await fetch(getChartUsia().url, {
+    //    headers: {
+    //     'Authorization': `Bearer ${usePage().props.auth.token}` // If you need to pass a token explicitly
+    //   }
+    // })
+    const response = await fetch(getUsiaChart().url)
     const result = await response.json()
 
     if (chartInstance) chartInstance.destroy()

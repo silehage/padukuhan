@@ -1,7 +1,6 @@
 <script setup>
 
-import { searchPenduduk } from '@/routes/api';
-import { create, assignPengurus, index } from '@/routes/pengurus';
+import { assignPengurus, index } from '@/routes/pengurus';
 import { router, useForm } from '@inertiajs/vue3';
 import { reactive, ref } from 'vue';
 
@@ -21,7 +20,12 @@ const handleEdit = (item) => {
     form.penduduk_id = item.id
     form.pengurus_id = item.pengurus_id ?? ''
 }
+
+const resetForm = () => {
+    form.reset('penduduk_id', 'pengurus_id')
+}
 const handleCreate = () => {
+    resetForm()
     isEdit.value = false
     modal.value = true
 }
@@ -30,8 +34,7 @@ const submitData = () => {
     form.submit(assignPengurus(), {
         onFinish: () => {
             modal.value = false
-            form.penduduk_id = ''
-            form.pengurus_id = ''
+           resetForm()
         }
     })
 }
@@ -54,7 +57,7 @@ const filterFn = async (val, update) => {
         return
     }
 
-    const response = await fetch(searchPenduduk(val).url)
+    const response = await fetch(search(val).url)
     const result = await response.json()
 
 
@@ -67,6 +70,7 @@ const filterFn = async (val, update) => {
 
 
 import { guard } from '@/lib/utils';
+import { search } from '@/routes/penduduk';
 const module = 'Pengurus'
 const can = (ability) => {
     return guard(`${ability} ${module}`)
@@ -143,7 +147,10 @@ const can = (ability) => {
     <q-dialog v-model="modal">
         <q-card class="section card-lg">
             <q-card-section>
-                <div class="card-title">Update Pengurus</div>
+                <div class="card-title flex justify-between items-center">
+                    <div>Update Pengurus</div>
+                    <q-btn icon="close" flat round dense v-close-popup></q-btn>
+                </div>
                 <q-form @submit="submitData">
                     <q-select debounce="700" use-input :disable="isEdit" emit-value map-options v-model="form.penduduk_id"
                         label="Nama Pengurus" :options="penduduk_options" @filter="filterFn"></q-select>
