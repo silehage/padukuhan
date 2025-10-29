@@ -11,4 +11,9 @@ class Pengurus extends Model
     protected $guarded = [];
 
     public $timestamps = false;
+
+    public function list()
+    {
+        return $this->hasMany(Penduduk::class);
+    }
 }

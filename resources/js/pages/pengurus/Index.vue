@@ -99,7 +99,6 @@ const can = (ability) => {
             </q-input>
 
             <div>
-                <!-- <AppPagination v-bind="data"></AppPagination> -->
                 <div class="table-responsive">
 
                     <table class="table bordered">

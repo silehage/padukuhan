@@ -6,7 +6,7 @@
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title>
-          Administrasi RT 05
+          {{ $page.props.name }}
 
         </q-toolbar-title>
         <q-btn icon="logout" flat round @click="router.visit(logout())">

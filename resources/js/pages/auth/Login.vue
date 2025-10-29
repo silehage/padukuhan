@@ -17,8 +17,8 @@ defineProps({
     
     <div class="flex column justify-center items-center full-width">
         <div class="page-title q-mb-lg text-center">
-            <div>SISTEM ADMINISTRASI RT</div>
-            <div>DUSUN KERJO 2</div>
+            <div>{{ $page.props.name }}</div>
+            <div>DUSUN KERJO II</div>
         </div>
 
         <q-card class="card-md section">
