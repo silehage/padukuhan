@@ -62,7 +62,7 @@ class User extends Authenticatable
         
         if ($userId) {
             if($userId == 1) {
-                return ['can-all'];
+                // return ['can-all'];
             }
             return Cache::remember('user_permissions_' . $userId, now()->addMinute(), function () use ($userId) {
                 $data = DB::table('permissions')

@@ -37,7 +37,7 @@ const can = (ability) => {
                                 <th class="text-left uppercase">Nama Barang</th>
                                 <th class="text-left uppercase">Asal Barang</th>
                                 <th class="text-left uppercase">Tgl Terima / Beli</th>
-                                <th class="text-left uppercase">Jumlah</th>
+                                <th class="text-right uppercase">Jumlah</th>
                                 <th class="text-left uppercase">Tempat Penyimpanan</th>
                                 <th class="text-left uppercase">Kondisi Barang</th>
                                 <th class="text-left uppercase">Ket</th>
@@ -50,7 +50,7 @@ const can = (ability) => {
                                 <td>{{ item.nama_barang }}</td>
                                 <td>{{ item.asal_barang }}</td>
                                 <td class="text-nowrap">{{ item.tanggal }}</td>
-                                <td>{{ item.jumlah }}</td>
+                                <td class="text-right">{{ item.jumlah }}</td>
                                 <td>{{ item.tempat_penyimpanan }}</td>
                                 <td>{{ item.kondisi_barang }}</td>
                                 <td>{{ item.keterangan }}</td>

@@ -9,5 +9,5 @@ class Permission extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    const MODULES = ['Kas', 'Inventaris', 'Penduduk', 'Pengurus', 'User'];
+    const MODULES = ['Kas', 'Inventaris', 'Penduduk', 'Pengurus', 'User', 'Permission'];
 }

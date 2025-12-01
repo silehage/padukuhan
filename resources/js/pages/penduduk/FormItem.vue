@@ -2,7 +2,7 @@
 import Input from '@/components/Input.vue';
 import Select from '@/components/Select.vue';
 import InputError from '@/components/InputError.vue';
-import { Head, Form } from '@inertiajs/vue3';
+import { Form } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import { updateItem, storeItem } from '@/routes/penduduk';
 
@@ -22,7 +22,7 @@ const gender = ["LAKI-LAKI", "PEREMPUAN"]
 const pendidikan = ['TIDAK/BELUM SEKOLAH', 'BELUM TAMAT SD SEDERAJAT', 'TAMAT SD/SEDRAJAT', 'SLTP SEDERAJAT', 'SLTA SEDERAJAT', 'AKADEMI/DIPLOMA III/S. MUDA', 'DIPLOMA IV/STRATA I']
 const pekerjaan = ['BELUM/TIDAK BEKERJA', 'WIRASWASTA', 'KARYAWAN SWASTA', 'MENGURUS RUMAH TANGGA', 'BURUH HARIAN LEPAS', 'PELAJAR/MAHASISWA', 'PETANI/PEKEBUN', 'SOPIR', 'PEDAGANG', 'GURU', 'PEGAWAI NEGERI SIPIL (PNS)', 'PENSIUNAN']
 const statusHubungan = ['KEPALA KELUARGA', 'SUAMI', 'ISTRI', 'ANAK', 'CUCU', 'ORANG TUA', 'MERTUA', 'FAMILI LAIN']
-const statusPerkawinan = ['KAWIN TERCATAT', 'BELUM KAWIN', 'CERAI MATI', 'CERAI']
+const statusPerkawinan = ['KAWIN', 'BELUM KAWIN', 'CERAI MATI', 'CERAI']
 const golonganDarah = ['TIDAK TAHU', 'A', 'B', 'AB', 'O']
 const wargaNegara = ['WNI', 'WNA']
 

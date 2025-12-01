@@ -8,10 +8,23 @@
    <title>KAS RT 05</title>
    <style>
       * {
-         font-size: 11px;
+         font-size: 12pt;
+         box-sizing: border-box;
+         padding: 0;
+         margin: 0;
+      }
+
+      body {
+         width: 100%;
+         padding: 5px;
+      }
+
+      @page {
+         size: 21cm 33cm landscape
       }
 
       table {
+         width: 100%;
          border-spacing: 0;
       }
 
@@ -37,7 +50,7 @@
 </head>
 
 <body>
-  
+
    <div>
 
 
@@ -61,7 +74,7 @@
                <th align="left" style="border:1px solid #ddd;">Kondisi</th>
                <th align="left" style="border:1px solid #ddd;">Ket</th>
             </tr>
-             @foreach($data as $row)
+            @foreach($data as $row)
             <tr>
                <td align="left" style="border:1px solid #ddd;">{{ $loop->iteration }}</td>
                <td align="left" style="border:1px solid #ddd;">{{ $row->nama_barang }}</td>
@@ -72,28 +85,28 @@
                <td align="left" style="border:1px solid #ddd;">{{ $row->kondisi_barang }}</td>
                <td align="left" style="border:1px solid #ddd;">{{ $row->keterangan }}</td>
             </tr>
-               @endforeach
-            
+            @endforeach
+
          </tbody>
          <tfoot>
-               <tr>
-                  <td colspan="5"></td>
-                 <td colspan="3">
-                     <div class="text-footer" style="padding-top:2rem">
-                        <div>......................,   ....................................................</div>
-                        <div style="padding-top:7px;">Mengetahui</div>
-                        <div style="padding-top:7px;">Ketua</div>
-                     </div>
-                  </td>
-               </tr>
-               <tr>
-                   <td colspan="5"></td>
-                  <td colspan="3">
-                     <div class="text-footer" style="padding-top:6rem">
-                        <div>( .......................................................... )</div>
-                     </div>
-                  </td>
-               </tr>
+            <tr>
+               <td colspan="5"></td>
+               <td colspan="3">
+                  <div class="text-footer" style="padding-top:2rem">
+                     <div>......................, ....................................................</div>
+                     <div style="padding-top:7px;">Mengetahui</div>
+                     <div style="padding-top:7px;">Ketua</div>
+                  </div>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="5"></td>
+               <td colspan="3">
+                  <div class="text-footer" style="padding-top:6rem">
+                     <div>( .......................................................... )</div>
+                  </div>
+               </td>
+            </tr>
          </tfoot>
       </table>
    </div>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Penduduk;
 use App\Exports\DataExport;
 use App\Models\KartuKeluarga;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ExportController extends Controller
@@ -22,32 +24,22 @@ class ExportController extends Controller
         // return view('pdf.dataIndukPadukuhan', compact('data'));
 
         $dompdf = Pdf::loadView('pdf.dataIndukPadukuhan', compact('data'));
-        // $dimensions =  [0, 0, 612, 792];
-        $dimensions =  array(0, 0, 610, 936);
-        $dompdf->setPaper($dimensions, 'landscape');
-        $filename = 'BUKU_INDUK_PADUKUHAN_RT_05';
+        $filename = 'BUKU_INDUK_PADUKUHAN_RT_05.pdf';
         return $dompdf->stream($filename);
     }
     public function dataIndukPenduduk()
     {
         $data = KartuKeluarga::with('items')->get();
         // return view('pdf.dataIndukPenduduk', compact('data'));
-
-
-
         $dompdf = Pdf::loadView('pdf.dataIndukPenduduk', compact('data'));
-        // $dimensions =  [0, 0, 612, 792];
-          $dimensions =  array(0, 0, 610, 936);
-        $dompdf->setPaper($dimensions, 'landscape');
-        // $dompdf->setPaper('letter', 'landscape');
-        $filename = 'BUKU_INDUK_PENDUDUK_(BIP)_RT';
+        $filename = 'BUKU_INDUK_PENDUDUK_(BIP)_RT.pdf';
         return $dompdf->stream($filename);
     }
     public function exportKas()
     {
-        $tahun = 2024;
+        $tahun = 2025;
 
-        // Ambil data kas tahun 2024
+        // Ambil data kas tahun 2025
         $kas = DB::table('kas')
             ->whereYear('tanggal', $tahun)
             ->orderBy('tanggal', 'asc')
@@ -61,7 +53,7 @@ class ExportController extends Controller
 
         $data = $grouped->map(function ($items, $key) {
             $carbon = Carbon::createFromFormat('Y-m', $key);
-            $label = $carbon->translatedFormat('F Y'); // Contoh: Januari 2024
+            $label = $carbon->translatedFormat('F Y'); // Contoh: Januari 2025
 
             $total_pendapatan = $items->where('in_out', 'IN')->sum('jumlah');
             $total_pengeluaran = $items->where('in_out', 'OUT')->sum('jumlah');
@@ -75,34 +67,34 @@ class ExportController extends Controller
         })->values();
 
 
-        //  $data = collect();
+        $data = collect();
 
-        // // Loop 12 bulan penuh
-        // for ($bulan = 1; $bulan <= 12; $bulan++) {
-        //     $carbon = Carbon::create($tahun, $bulan, 1);
-        //     $key = $carbon->format('Y-m');
-        //     $label = $carbon->translatedFormat('F Y'); // Contoh: Januari 2024
+        // Loop 12 bulan penuh
+        for ($bulan = 1; $bulan <= 11; $bulan++) {
+            $carbon = Carbon::create($tahun, $bulan, 1);
+            $key = $carbon->format('Y-m');
+            $label = $carbon->translatedFormat('F Y'); // Contoh: Januari 2024
 
-        //     $items = $grouped->get($key, collect());
+            $items = $grouped->get($key, collect());
 
-        //     $total_pendapatan = $items->where('in_out', 'IN')->sum('jumlah');
-        //     $total_pengeluaran = $items->where('in_out', 'OUT')->sum('jumlah');
+            $total_pendapatan = $items->where('in_out', 'IN')->sum('jumlah');
+            $total_pengeluaran = $items->where('in_out', 'OUT')->sum('jumlah');
 
-        //     $data->push([
-        //         'label' => $label,
-        //         'items' => $items->values(),
-        //         'total_pendapatan' => (int) $total_pendapatan,
-        //         'total_pengeluaran' => (int) $total_pengeluaran,
-        //     ]);
-        // }
+            $data->push([
+                'label' => $label,
+                'items' => $items->values(),
+                'total_pendapatan' => (int) $total_pendapatan,
+                'total_pengeluaran' => (int) $total_pengeluaran,
+            ]);
+        }
 
         // dd($data);
 
         // return view('pdf.kas', compact('data'));
 
         $dompdf = Pdf::loadView('pdf.kas', compact('data'));
-        $dompdf->setPaper('a4', 'portrait');
-        $filename = 'BUKU_KAS_RT_05';
+        $dompdf->setPaper('A4', 'portrait');
+        $filename = 'BUKU_KAS_RT_05.pdf';
         return $dompdf->stream($filename);
 
 
@@ -110,7 +102,7 @@ class ExportController extends Controller
     }
     public function exportInventaris()
     {
-        $tahun = 2024;
+        $tahun = 2025;
 
         // Ambil data kas tahun 2024
         $data = DB::table('inventaris')
@@ -121,8 +113,49 @@ class ExportController extends Controller
         // return view('pdf.inventaris', compact('data'));
 
         $dompdf = Pdf::loadView('pdf.inventaris', compact('data'));
-        $dompdf->setPaper('a4', 'landscape');
-        $filename = 'BUKU_INVENTARIS_RT_05';
+        $filename = 'BUKU_INVENTARIS_RT_05.pdf';
+        return $dompdf->stream($filename);
+
+
+        return response()->json($result);
+    }
+    public function exportPengurus()
+    {
+        $result = Penduduk::select(
+            'penduduk.*',
+            'pengurus.jabatan',
+            'kartu_keluarga.alamat'
+        )
+            ->join('pengurus', 'pengurus.id', 'penduduk.pengurus_id')
+            ->join('kartu_keluarga', 'kartu_keluarga.id', 'penduduk.kartu_keluarga_id')
+            ->orderBy('pengurus.id')
+            ->get();
+
+        $data = [];
+
+        $key = 0;
+
+        for ($i = 0; $i < $result->count(); $i++) {
+
+            if ($i % 12 == 0) {
+                $key++;
+                $data[$key][] = $result[$i]; 
+            }else {
+
+                Log::debug($key);
+
+                // dd($key);
+                $data[$key][] = $result[$i];
+            }
+        }
+
+        // dd($data);
+
+        // return view('pdf.pengurus', compact('data'));
+
+        $dompdf = Pdf::loadView('pdf.pengurus', compact('data'));
+        $dompdf->setPaper('folio', 'landscape');
+        $filename = 'pengurus_RT_05.pdf';
         return $dompdf->stream($filename);
 
 

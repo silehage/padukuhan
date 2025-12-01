@@ -33,6 +33,13 @@ const query = reactive({
 const searchData = () => {
    router.visit(list({ query: query }))
 }
+
+import { guard } from '@/lib/utils';
+const module = 'Penduduk'
+const can = (ability) => {
+    return guard(`${ability} ${module}`)
+}
+
 </script>
 
 <template>

@@ -8,10 +8,22 @@
    <title>KAS RT 05</title>
    <style>
       * {
-         font-size: 11px;
+         font-size: 12pt;
+         box-sizing: border-box;
+         padding: 0;
+         margin: 0;
+      }
+
+       /* @page { size: 21cm 33cm portrait } */
+
+      body {
+         width: 100%;
+         margin: 0;
+         padding: 5px;
       }
 
       table {
+         width: 100%;
          border-spacing: 0;
       }
 
@@ -38,7 +50,7 @@
 
 <body>
    @foreach($data as $row)
-   <div class="{{ $loop->last ? '' : 'page-break' }}">
+   <div class="{{ $loop->last ? '' : 'page-break' }}" style="width: 100%;">
 
 
       <table style="width:100%;">
@@ -72,52 +84,53 @@
             </tr>
             @endforeach
             @for($i = 0; $i < (24 - count($row['items'])); $i++)
-            <tr>
-                @for($j = 0; $j < 5; $j++)
-                  <td align="left" style="border:1px solid #ddd;height:10px;"></td>
-               @endfor
-            </tr>
-            @endfor
                <tr>
-                  <th align="left" style="border:1px solid #ddd;height:10px;"></th>
-                  <th align="left" style="border:1px solid #ddd;height:10px;"></th>
-                  <th align="left" style="border:1px solid #ddd;height:10px;">Jml Penerimaan/Pengeluaran</th>
-                  <th align="right" style="border:1px solid #ddd;height:10px;">{{ $row['total_pendapatan'] }}</th>
-                  <th align="right" style="border:1px solid #ddd;height:10px;">{{ $row['total_pengeluaran'] }}</th>
-               </tr>
-               <tr>
-                  <th align="left" style="border:1px solid #ddd;height:10px;"></th>
-                  <th align="left" style="border:1px solid #ddd;height:10px;"></th>
-                  <th align="left" style="border:1px solid #ddd;height:10px;">Saldo Akhir</th>
-                  <th align="right" style="border:1px solid #ddd;height:10px;" colspan="2">{{ $row['total_pendapatan'] - $row['total_pengeluaran'] }}</th>
+               @for($j = 0; $j < 5; $j++)
+                  <td align="left" style="border:1px solid #ddd;height:10px;">
+                  </td>
+                  @endfor
+                  </tr>
+                  @endfor
+                  <tr>
+                     <th align="left" style="border:1px solid #ddd;height:10px;"></th>
+                     <th align="left" style="border:1px solid #ddd;height:10px;"></th>
+                     <th align="left" style="border:1px solid #ddd;height:10px;">Jml Penerimaan/Pengeluaran</th>
+                     <th align="right" style="border:1px solid #ddd;height:10px;">{{ $row['total_pendapatan'] }}</th>
+                     <th align="right" style="border:1px solid #ddd;height:10px;">{{ $row['total_pengeluaran'] }}</th>
+                  </tr>
+                  <tr>
+                     <th align="left" style="border:1px solid #ddd;height:10px;"></th>
+                     <th align="left" style="border:1px solid #ddd;height:10px;"></th>
+                     <th align="left" style="border:1px solid #ddd;height:10px;">Saldo Akhir</th>
+                     <th align="right" style="border:1px solid #ddd;height:10px;" colspan="2">{{ $row['total_pendapatan'] - $row['total_pengeluaran'] }}</th>
 
-               </tr>
-               <tr>
-                  <td colspan="3">
-                     <div class="text-footer" style="padding-top:2rem">
-                        <div>Menyetujui</div>
-                        <div>Ketua</div>
-                     </div>
-                  </td>
-                  <td colspan="2">
-                     <div class="text-footer" style="padding-top:2rem">
-                        <div>......................,   ....................................................</div>
-                        <div style="padding-top:7px;">Pemegang Kas</div>
-                     </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td colspan="3">
-                     <div class="text-footer" style="padding-top:6rem">
-                       <div>( .......................................................... )</div>
-                     </div>
-                  </td>
-                  <td colspan="2">
-                     <div class="text-footer" style="padding-top:6rem">
-                        <div>( .......................................................... )</div>
-                     </div>
-                  </td>
-               </tr>
+                  </tr>
+                  <tr>
+                     <td colspan="3">
+                        <div class="text-footer" style="padding-top:2rem">
+                           <div>Menyetujui</div>
+                           <div>Ketua</div>
+                        </div>
+                     </td>
+                     <td colspan="2">
+                        <div class="text-footer" style="padding-top:2rem">
+                           <div>......................, ....................................................</div>
+                           <div style="padding-top:7px;">Pemegang Kas</div>
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="3">
+                        <div class="text-footer" style="padding-top:6rem">
+                           <div>( .......................................................... )</div>
+                        </div>
+                     </td>
+                     <td colspan="2">
+                        <div class="text-footer" style="padding-top:6rem">
+                           <div>( .......................................................... )</div>
+                        </div>
+                     </td>
+                  </tr>
          </tbody>
       </table>
    </div>

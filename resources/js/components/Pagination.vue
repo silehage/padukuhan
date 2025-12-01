@@ -16,11 +16,13 @@ defineProps({
 </script>
 
 <template>
-   <div class="flex justify-end items-center q-gutter-x-sm no-wrap text-md q-py-xs" v-if="total > 0">
+   <div class="flex justify-end items-center q-gutter-x-xs no-wrap q-py-xs" v-if="total > 0">
       <div>Page</div>
       <div>{{ current_page }}</div>
-      <div>of</div>
+      <div>/</div>
       <div>{{ last_page }}</div>
+      <div>Total</div>
+      <div class="q-pr-sm">{{ total }}</div>
       <!-- <q-btn v-if="current_page > 1" outline size="11px" label="FIRST" @click="router.get(first_page_url)"></q-btn> -->
       <q-btn :disable="!prev_page_url" outline size="11px" label="PREV" @click="router.get(prev_page_url)"></q-btn>
       <q-btn :disable="!next_page_url" outline size="11px" label="NEXT" @click="router.get(next_page_url)"></q-btn>

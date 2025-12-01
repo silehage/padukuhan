@@ -19,6 +19,13 @@ class PendudukController extends Controller
         $data = Penduduk::select('id', 'nama_lengkap', 'pendidikan')->where('nama_lengkap', 'like', '%' . $key . '%')->get();
         return response()->json($data);
     }
+    public function searchkartuKeluarga($key)
+    {
+        $data = KartuKeluarga::select('id', 'kepala_keluarga', 'nomor')
+        ->where('kepala_keluarga', 'like', '%' . $key . '%')
+        ->get();
+        return response()->json($data);
+    }
     public function list(Request $request)
     {
         $data = Penduduk::select(
@@ -114,6 +121,21 @@ class PendudukController extends Controller
         $data = KartuKeluarga::create($validated);
 
         return redirect()->route('penduduk.show', $data->id);
+    }
+    public function updateKartuKeluarga(Request $request)
+    {
+        $request->validate([
+            'kartu_keluarga_id' => ['required', 'exists:kartu_keluarga,id'],
+            'penduduk_id' => ['required', 'exists:penduduk,id'],
+        ]);
+
+        $kk = KartuKeluarga::findOrFail($request->kartu_keluarga_id);
+        $penduduk = Penduduk::find($request->penduduk_id);
+        $penduduk->update([
+            'kartu_keluarga_id' => $kk->id
+        ]);
+
+        return redirect()->route('penduduk.show', $kk->id);
     }
 
     /**

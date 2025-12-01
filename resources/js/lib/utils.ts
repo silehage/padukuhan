@@ -31,3 +31,12 @@ export function guard(ability) {
     return permissions.value.includes(ability)
 
 }
+
+export function currency (num) {
+   return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(num ?? 0);
+}
+
+export function moneyFormat(numb) {
+   if (!numb) return 0;
+   return numb.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}

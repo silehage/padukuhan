@@ -11,6 +11,7 @@ class Penduduk extends Model
     protected $table = 'penduduk';
 
     protected $fillable = [
+        'kartu_keluarga_id',
         'nama_lengkap',
         'nik',
         'Jenis_kelamin',

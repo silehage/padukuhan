@@ -71,6 +71,7 @@ const filterFn = async (val, update) => {
 
 import { guard } from '@/lib/utils';
 import { search } from '@/routes/penduduk';
+import { exportPengurus } from '@/routes';
 const module = 'Pengurus'
 const can = (ability) => {
     return guard(`${ability} ${module}`)
@@ -83,6 +84,7 @@ const can = (ability) => {
     <AppHeader title="Susunan Pengurus">
         <div class="flex justify-end q-gutter-sm">
             <q-btn v-if="can('Create')" color="primary" @click="handleCreate">Tambah Data</q-btn>
+             <q-btn label="Export" color="teal" :href="exportPengurus().url" target="_blank"></q-btn>
         </div>
     </AppHeader>
 
@@ -124,8 +126,7 @@ const can = (ability) => {
                                 <td>{{ item.tanggal_lahir }}</td>
                                 <td>{{ item.status_perkawinan }}</td>
                                 <td class="q-gutter-xs no-wrap">
-                                    <q-btn v-if="can('Update')" class="btn-action" no-caps color="blue" @click="handleEdit(item)">Edit</q-btn
-                                        color="blue">
+                                    <q-btn color="blue" v-if="can('Update')" class="btn-action" no-caps @click="handleEdit(item)">Edit</q-btn>
                                 </td>
                             </tr>
                             <tr v-if="!data.total">

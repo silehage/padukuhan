@@ -22,7 +22,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('export/data-induk-penduduk', [ExportController::class, 'dataIndukPenduduk'])->name('exportDataIndukPenduduk');
     Route::get('export/kas', [ExportController::class, 'exportKas'])->name('exportKas');
     Route::get('export/inventaris', [ExportController::class, 'exportInventaris'])->name('exportInventaris');
+    Route::get('export/pengurus', [ExportController::class, 'exportPengurus'])->name('exportPengurus');
 
+    Route::post('penduduk/updateKartuKeluarga', [PendudukController::class, 'updateKartuKeluarga'])->name('penduduk.updateKartuKeluarga');
     Route::get('penduduk/list', [PendudukController::class, 'list'])->name('penduduk.list');
     Route::get('penduduk/{id}/createItem', [PendudukController::class, 'createItem'])->name('penduduk.createItem');
     Route::post('penduduk/{id}/storeItem', [PendudukController::class, 'storeItem'])->name('penduduk.storeItem');
@@ -43,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/chart/usia', [PendudukController::class, 'getUsiaChart'])->name('penduduk.getUsiaChart');
     Route::get('/chart/jenis-kelamin', [PendudukController::class, 'getJenisKelaminChart'])->name('penduduk.getJenisKelaminChart');
     Route::get('/search-penduduk/{key}', [PendudukController::class, 'search'])->name('penduduk.search');
+    Route::get('/search-kk/{key}', [PendudukController::class, 'searchkartuKeluarga'])->name('penduduk.searchkartuKeluarga');
 });
 
 require __DIR__ . '/auth.php';

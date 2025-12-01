@@ -27,6 +27,11 @@ class AssignRolePermissionSeeder extends Seeder
                     $role->permissions()->attach($p);
                 }
             }
+
+            if (in_array($role->name, ['Super Admin'])) {
+                $permissions = Permission::whereIn('ability', ['Create', 'Update'])->get();
+                $role->permissions()->sync($permissions);
+            }
         }
     }
 }

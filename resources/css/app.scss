@@ -62,6 +62,9 @@ table.table {
 
    tr>th {
       text-align: left;
+      &.text-right {
+         text-align: right;
+      }
    }
 
    &.bordered {
@@ -76,6 +79,10 @@ table.table {
    line-height: 1.715em;
    padding: 4px 16px;
    min-height: 2.4em;
+
+   .q-btn__content{
+      white-space: nowrap;
+   }
 }
 
 .grid {

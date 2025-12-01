@@ -6,18 +6,32 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
    <title>BUKU INDUK PADUKUHAN RT 05</title>
-   <style>
+  <style>
       * {
-         font-size: 10px;
+         font-size: 11pt;
+         box-sizing: border-box;
+         padding: 0;
+         margin: 0;
       }
+      body {
+         width: 100%;
+         padding: 5px;
+      }
+
+       @page { size: 21cm 35cm landscape }
 
       table {
          border-spacing: 0;
+         width: 100%;
+      }
+      tr td {
+         font-size: 10.5pt;
+         text-transform: capitalize;
       }
 
       tr th,
       tr td {
-         padding: 4px;
+         padding: 2px 6px;
       }
 
       .page-break {
@@ -91,16 +105,16 @@
          <td align="left" style="border:1px solid #ddd;"></td>
       </tr>
       @endforeach
-      @for($i = 0; $i < (4 -$row->items->count()); $i++)
+      <!-- @for($i = 0; $i < (4 -$row->items->count()); $i++)
          <tr>
             @for($j = 0; $j < 14; $j++)
             <td align="left" style="border:1px solid #ddd;height:18px;"></td>
             @endfor
          </tr>
-         @endfor
+         @endfor -->
          @if( $loop->iteration % 2 == 0)
-   </table>
-   @endif
+         </table>
+         @endif
    @endforeach
 </body>
 
